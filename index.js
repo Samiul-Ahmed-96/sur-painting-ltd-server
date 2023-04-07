@@ -104,6 +104,53 @@ const run = async () => {
       const result = await contactListCollection.deleteOne(query);
       res.json({ status: true, data: result });
     });
+
+    //Update Single Service
+    app.put("/services/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedService = req.body;
+      const filter = { _id: ObjectId(id) };
+      const options = { upsert: true };
+
+      console.log(id , updatedService);
+
+      const updateDoc = {
+        $set: {
+          title: updatedService.title,
+          img:updatedService.img,
+          details: updatedService.details,
+        },
+      };
+      const result = await servicesCollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
+      res.send({ status: true, data: result });
+    });
+    //Update Single Project
+    app.put("/projects/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedProject = req.body;
+      const filter = { _id: ObjectId(id) };
+      const options = { upsert: true };
+
+      const updateDoc = {
+        $set: {
+          status: updatedProject.status,
+          location:updatedProject.location,
+          type:updatedProject.type,
+          img:updatedProject.img
+        },
+      };
+      const result = await servicesCollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
+      res.send({ status: true, data: result });
+    });
+
   } finally {
   }
 };
