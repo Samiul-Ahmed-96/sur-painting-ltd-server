@@ -139,7 +139,7 @@ const run = async () => {
           img: updatedProject.img,
         },
       };
-      const result = await servicesCollection.updateOne(
+      const result = await projectsCollection.updateOne(
         filter,
         updateDoc,
         options
