@@ -111,13 +111,10 @@ const run = async () => {
       const updatedService = req.body;
       const filter = { _id: ObjectId(id) };
       const options = { upsert: true };
-
-      console.log(id , updatedService);
-
       const updateDoc = {
         $set: {
           title: updatedService.title,
-          img:updatedService.img,
+          img: updatedService.img,
           details: updatedService.details,
         },
       };
@@ -134,13 +131,12 @@ const run = async () => {
       const updatedProject = req.body;
       const filter = { _id: ObjectId(id) };
       const options = { upsert: true };
-
       const updateDoc = {
         $set: {
           status: updatedProject.status,
-          location:updatedProject.location,
-          type:updatedProject.type,
-          img:updatedProject.img
+          location: updatedProject.location,
+          type: updatedProject.type,
+          img: updatedProject.img,
         },
       };
       const result = await servicesCollection.updateOne(
@@ -150,7 +146,6 @@ const run = async () => {
       );
       res.send({ status: true, data: result });
     });
-
   } finally {
   }
 };
